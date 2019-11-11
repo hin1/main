@@ -100,8 +100,8 @@ image::LogicClassDiagram.png[width="1000", align="center"]
 _Classes involved: Parser, Command and its inherited classes_
 
 The logic component is shows how user instructions are managed in RIMS. The Parser class receives input from the Ui,
-then parses it (using parseInput function) to identify the type of Command it is. After identifying the type of Command,
-Parser then evaluates the relevant parameters required and constructs the corresponding Command. Following that, the
+then parses it (using parseInput method) to identify the type of Command it is. After identifying the type of Command,
+Parser then evaluates the relevant parameters required and constructs the corresponding Command, using the relevant Parser method. Following that, the
 Command's execute method is called to carry out the instructions.
 
 ==== The Command class
@@ -110,7 +110,7 @@ Referring to Figure 1.4, the Command class is an abstract class with two main pa
 Command classes.
 
 Firstly, since the main program runs on a loop to evaluate user inputs repeatedly for commands, it needs to know
-when to terminate. The Boolean attribute exitCode is inherited in every subclass of Command, and helps the main program
+when to terminate. The Boolean attribute willExit is inherited in every subclass of Command, and helps the main program
 to check if the Command is a CloseCommand, a special Command which instructs RIMS to terminate.
 
 Secondly, the execute method is an abstract method that applies to all Commands in the RIMS system.
@@ -160,28 +160,6 @@ _Classes involved: RimsException and all inherited classes_
 RimsException is a custom Exception class to catch all errors presented by contextual problems occuring within RIMS
 that basic Exceptions will miss. The overarching idea behind this component is that RIMS should not terminate under any
 other circumstances other than by means of the CloseCommand (as mentioned in the Logic Component).
-
-The basic RimsException class contains a String describing the type of error that has been occurred, and has a method to
-send a formatted output to the user notifying him/her about the error that has occurred.
-
-Current subclasses of RimsException are ParserException and ResourceException, but are not limited to these as there may
-be other aspects which have errors that have not been identified.
-
-==== ParserException
-
-ParserExceptions are called when the Parser receives an invalid input. For instance, when the user is prompted for the type
-of resource specified, and he/she inputs "people", a ParserException should be raised. This is because the type of Resource
-specified does not belong to any that RIMS support, which are "item" and "room".
-
-They are mainly handled by prompting the user to re-input a valid format of the required information.
-
-==== ResourceException
-
-These Exceptions are mainly handled when internal operations within the Model or Logic component have problems. For example,
-user inputs like the duration to borrow a resource is valid, but the resource might still be on loan. As such, a
-ResourceException is called.
-
-They are mainly handled by sending a message to the user to notify them on the problem with the particular Resource.
 
 == Implementation
 
