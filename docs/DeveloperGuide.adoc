@@ -66,12 +66,8 @@ borrow one again.
 
 This leads to the second important attribute which is the ReservationList, which is an ArrayList of
 Reservation objects. A Reservation object contains details of a loan or reservation, such as the identity of the borrower
-(borrower_id), the unique identifier for that particular loan (reservation_id) to identify multiple unique Resources
-borrowed, and lastly a custom DateRange object to identify the duration for which the Resource is being borrowed.
-
-The DateRange class contains functions to typecast the dates into a specified format of String type for passing to Ui
-as a message to the user.
-
+(userId), the unique identifier for that particular loan (reservationId) to identify multiple unique Resources
+borrowed, and lastly two Dates to identify the duration for which the Resource is being borrowed.
 
 === UI component
 .Class Diagram for UI component
